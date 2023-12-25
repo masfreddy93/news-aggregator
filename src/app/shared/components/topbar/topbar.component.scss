@@ -1,0 +1,17 @@
+@import '/src/consts.scss';
+
+.-topbar-container{
+  background-color: #ffffff; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .-topbar-content{
+    height: $topbar-height;
+    max-width: $page-max-width;
+    margin: 0 auto;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+}
