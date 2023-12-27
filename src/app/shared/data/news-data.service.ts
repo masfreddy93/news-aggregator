@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IMediaStackApiResponse } from '../interfaces/i-media-stack-api-response.interface';
 import { Observable, delay, of } from 'rxjs';
 import { NEWS_MOCK_DATA } from '../mocks/news-mock.data';
+import { IMediaStackApiRequestParams } from '../interfaces/i-media-stack-api-request-params.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +19,27 @@ export class NewsDataService {
 
   constructor(private _http: HttpClient) {}
 
-  getAll(): Observable<IMediaStackApiResponse> {
-    return this._http.get<IMediaStackApiResponse>(this._apiUrl);
+  getAll(
+    params: IMediaStackApiRequestParams | any
+  ): Observable<IMediaStackApiResponse> {
+    let httpParams = new HttpParams();
+
+    for (const key in params) {
+      if (params.hasOwnProperty(key)) {
+        httpParams = httpParams.set(key, params[key]);
+      }
+    }
+
+    return this._http.get<IMediaStackApiResponse>(this._apiUrl, {
+      params: httpParams,
+    });
   }
 
-  getAllMockData(): Observable<IMediaStackApiResponse> {
+  getAllMockData(
+    params: IMediaStackApiRequestParams
+  ): Observable<IMediaStackApiResponse> {
+    console.log(params);
+
     return of(NEWS_MOCK_DATA);
   }
 }

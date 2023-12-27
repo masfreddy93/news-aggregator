@@ -27,14 +27,14 @@ export interface IMediaStackPagination {
  * For reference, see [MediaStack Documentation](https://mediastack.com/documentation#:~:text=first%20available%20result.-,Example%20API%20Response%3A,-If%20your%20API).
  */
 export interface IMediaStackNews {
-  author?: string;
-  title?: string;
-  description?: string;
-  url?: string;
-  source?: string;
-  image?: string;
-  category?: string;
-  language?: string;
-  country?: string;
-  published_at?: string;
+  author: string | null;
+  title: string | null;
+  description: string | null;
+  url: string | null;
+  source: string | null;
+  image: string | null;
+  category: string | null;
+  language: string | null;
+  country: string | null;
+  published_at: string | null;
 }
