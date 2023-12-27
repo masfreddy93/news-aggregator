@@ -5,7 +5,6 @@
   <div class="-menu-voices">
     <div class="-menu-voice" *ngFor="let voice of MAIN_MENU">
       <mat-icon>{{ voice.iconName }}</mat-icon>
-      <!-- TODO: close sidebar if click on link and mobile device  -->
       <a [routerLink]="'/auth/' + voice.routerLink"
         (click)="responsiveService.isMobile ? sidebarService.toggleSidebar() : null">{{
         voice.label }}</a>
