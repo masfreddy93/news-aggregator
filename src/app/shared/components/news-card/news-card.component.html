@@ -1,0 +1,34 @@
+<div class="-card-container">
+  <div class="-image-side">
+    <img [src]="newsItem?.image ?? '../../../../assets/imgs/immagine-non-disponibile.png'" alt="News Image">
+  </div>
+  <div class="-content-side">
+    <div class="-heading">
+      <div class="-title -h3 -truncate -one-line">{{ newsItem?.title ?? 'Titolo non disponibile' }}</div>
+      <div class="-description -truncate -three-lines">{{ newsItem?.description ?? 'Descrizione non disponibile' }}
+      </div>
+    </div>
+
+    <div class="-details">
+      <div class="-author-and-date-row -truncate -one-line">
+        <span>di</span>
+        <span class="-author"> {{ newsItem?.author ?? 'Autore non disponibile' }}, </span>
+        <span> {{ (newsItem?.published_at | date: 'fullDate') ?? 'Data pubblicazione non disponibile' }}</span>
+      </div>
+      <div class="-language-and-category-row -truncate -one-line">
+        <span> Lingua: {{ newsItem?.language ?? 'Lingua non disponibile' }} </span>
+        <span class="-chip"> {{ (newsItem?.category | titlecase) ?? 'Categoria non disponibile' }}</span>
+      </div>
+      <div class="-actions">
+        <button mat-button>
+          <mat-icon>favorite</mat-icon>
+          <span>Salva</span>
+        </button>
+        <button mat-button>
+          <mat-icon>open_in_new</mat-icon>
+          <a [href]="newsItem?.url" target="_blank">Apri</a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
