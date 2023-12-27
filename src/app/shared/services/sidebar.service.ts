@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class SidebarService {
-  isOpen: boolean = false;
+  isOpen: boolean = window.innerWidth > 768;
 
   toggleSidebar(): void {
     this.isOpen = !this.isOpen;

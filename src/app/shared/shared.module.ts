@@ -5,10 +5,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MainTemplateComponent } from './components/main-template/main-template.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [TopbarComponent, SidebarComponent],
-  imports: [CommonModule, MatIconModule, MatButtonModule, MatTooltipModule],
-  exports: [TopbarComponent, SidebarComponent],
+  declarations: [TopbarComponent, SidebarComponent, MainTemplateComponent],
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    RouterModule,
+  ],
+  exports: [TopbarComponent, SidebarComponent, MainTemplateComponent],
 })
 export class SharedModule {}

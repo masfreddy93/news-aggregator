@@ -1,4 +1,5 @@
 @import '/src/consts.scss';
+@import '/src/mixins.scss';
 
 .-topbar{
   position: fixed;
@@ -8,21 +9,31 @@
 }
 
 .-body{
-  background-color: yellow;
   height: calc(100vh - $topbar-height);
   margin: $topbar-height auto 0;
   display: flex;
 
   .-sidebar{
     width: 0;
-    background: lightblue;
-    border: 1px solid red;
     display: block;
     overflow: auto;
     transition: all 0.2s ease-in-out;
 
+    @include mobile{
+      position: absolute;
+      top: 60px;
+      bottom: 0;
+      z-index: 2;
+    }
+
     &.-is-open{
-      width: $sidebar-width;
+      @include tablet-desktop{
+        width: $sidebar-tablet-desktop-width;
+        flex-shrink: 0;
+      }
+      @include mobile{
+        width: 100% !important;
+      }
     }
   }
 
@@ -31,17 +42,5 @@
     max-width: 1200px;
     margin: 0 auto;
     overflow: auto;
-  }
-}
-
-//TODO: refactor 
-@media only screen and (max-width: 600px) {
-  .-is-open {
-    width: 100% !important;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    bottom: 0;
   }
 }

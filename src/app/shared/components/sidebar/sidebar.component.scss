@@ -1,0 +1,38 @@
+@import '/src/consts.scss';
+@import '/src/mixins.scss';
+
+.-sidebar-container{
+  height: 100%;
+  background-color: $sidebar-background-color;
+  padding: 20px;
+
+  .-title{
+    margin-bottom: 36px;
+
+    @include mobile {
+      text-align: center;
+      margin-top: 60px;
+    }
+  }
+
+  .-menu-voices {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include mobile {
+      align-items: center;
+    }
+  }
+
+  .-menu-voice {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: .8;
+
+    &:hover { 
+      opacity: 1;
+    }
+  }
+}
