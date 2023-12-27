@@ -1,0 +1,46 @@
+@import '/src/consts.scss';
+@import '/src/mixins.scss';
+
+.-topbar{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.-body{
+  height: calc(100vh - $topbar-height);
+  margin: $topbar-height auto 0;
+  display: flex;
+
+  .-sidebar{
+    width: 0;
+    display: block;
+    overflow: auto;
+    transition: all 0.2s ease-in-out;
+
+    @include mobile{
+      position: absolute;
+      top: 60px;
+      bottom: 0;
+      z-index: 2;
+    }
+
+    &.-is-open{
+      @include tablet-desktop{
+        width: $sidebar-tablet-desktop-width;
+        flex-shrink: 0;
+      }
+      @include mobile{
+        width: 100% !important;
+      }
+    }
+  }
+
+  .-page{
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: auto;
+  }
+}

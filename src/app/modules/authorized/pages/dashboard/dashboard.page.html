@@ -1,0 +1,7 @@
+<app-topbar class="-topbar"></app-topbar>
+<div class="-body">
+  <app-sidebar class="-sidebar" [class.-is-open]="sidebarService.isOpen"></app-sidebar>
+  <div class="-page">
+    <router-outlet></router-outlet>
+  </div>
+</div>

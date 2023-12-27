@@ -1,0 +1,20 @@
+<div class="-main-template-container">
+  <!-- Loading spinner  -->
+  <mat-spinner *ngIf="isLoading && !hasErrors" class="-mat-spinner"></mat-spinner>
+
+  <!-- Errors refresh option  -->
+  <div class="-error-options" *ngIf="hasErrors">
+    <div class="-error-message">
+      OPS! Sembra che ci siano problemi nel caricamento della pagina.
+    </div>
+    <button mat-flat-button color="warn" (click)="reloadPage()">
+      <mat-icon>refresh</mat-icon>
+      <span>Ricarica pagina</span>
+    </button>
+  </div>
+
+  <!-- Body (content) -->
+  <div class="-body" [class.-is-loading]="isLoading" *ngIf="!hasErrors">
+    <ng-content select="[body]"></ng-content>
+  </div>
+</div>
