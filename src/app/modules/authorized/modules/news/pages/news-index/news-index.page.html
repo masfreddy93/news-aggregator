@@ -1,0 +1,23 @@
+<app-main-template [isLoading]="isLoading" [hasErrors]="hasErrors">
+  <div body>
+    <div class="-news-container">
+      <div class="-title -h1">Notizie</div>
+      <div class="-news-list" *ngIf="newsList.length; else noData">
+        <ng-container *ngFor="let newsItem of newsList">
+          <app-news-card [newsItem]="newsItem"></app-news-card>
+        </ng-container>
+      </div>
+      <ng-template #noData>
+        <div class="-no-data-container">
+          <img class="-no-data" src="../../../../../../../assets/imgs/no-data.png" alt="No Data">
+          <span>Nessuna notizia trovata</span>
+        </div>
+      </ng-template>
+
+      <div class="-paginator-container">
+        <mat-paginator [length]="paginatorDefaultConfig.length"
+          [pageSizeOptions]="paginatorDefaultConfig.pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</app-main-template>

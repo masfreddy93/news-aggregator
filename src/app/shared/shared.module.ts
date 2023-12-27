@@ -8,9 +8,15 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MainTemplateComponent } from './components/main-template/main-template.component';
 import { RouterModule } from '@angular/router';
+import { NewsCardComponent } from './components/news-card/news-card.component';
 
 @NgModule({
-  declarations: [TopbarComponent, SidebarComponent, MainTemplateComponent],
+  declarations: [
+    TopbarComponent,
+    SidebarComponent,
+    MainTemplateComponent,
+    NewsCardComponent,
+  ],
   imports: [
     CommonModule,
     MatIconModule,
@@ -19,6 +25,11 @@ import { RouterModule } from '@angular/router';
     MatProgressSpinnerModule,
     RouterModule,
   ],
-  exports: [TopbarComponent, SidebarComponent, MainTemplateComponent],
+  exports: [
+    TopbarComponent,
+    SidebarComponent,
+    MainTemplateComponent,
+    NewsCardComponent,
+  ],
 })
 export class SharedModule {}

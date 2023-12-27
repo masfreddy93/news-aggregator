@@ -6,6 +6,18 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardPage,
+    children: [
+      {
+        path: 'news',
+        loadChildren: () =>
+          import('./modules/news/news.module').then((m) => m.NewsModule),
+      },
+      {
+        path: '',
+        redirectTo: 'news',
+        pathMatch: 'full',
+      },
+    ],
   },
 ];
 
