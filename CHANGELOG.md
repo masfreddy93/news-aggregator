@@ -21,3 +21,7 @@ All notable changes to this project will be documented in this file.
 
 - Creazione componente `news-filters` per gestire i filtri di ricerca delle news.
 - Aggiunta del componente `news-filters` alla `news-index` page.
+
+- Aggiunta la possibilità di salvare una news tra i preferiti (nel localStorage).
+- Aggiunta la possibilità di rimuovere una news dai preferiti (localStorage).
+- Ora i bottoni 'Salva' e 'Apri' sono disabilitati se la news non ha un url valorizzato.
