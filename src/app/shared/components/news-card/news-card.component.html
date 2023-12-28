@@ -20,11 +20,11 @@
         <span class="-chip"> {{ (newsItem?.category | titlecase) ?? 'Categoria non disponibile' }}</span>
       </div>
       <div class="-actions">
-        <button mat-button>
-          <mat-icon>favorite</mat-icon>
-          <span>Salva</span>
+        <button mat-button (click)="toggleFavorite()" [disabled]="!newsItem?.url">
+          <mat-icon [class.-color-red]="isInFavorites">favorite</mat-icon>
+          <span>{{ isInFavorites ? 'Salvato' : 'Salva' }}</span>
         </button>
-        <button mat-button>
+        <button mat-button [disabled]="!newsItem?.url">
           <mat-icon>open_in_new</mat-icon>
           <a [href]="newsItem?.url" target="_blank">Apri</a>
         </button>
