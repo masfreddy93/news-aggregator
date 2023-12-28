@@ -8,10 +8,8 @@
 export interface IMediaStackApiRequestParams {
   limit: number;
   offset: number;
-
-  // TODO: handle the properties below when adding filters
-  // languages: string[];
-  // keywords: string;
-  // categories: string[];
-  // date: string[];
+  languages: string;
+  keywords: string;
+  categories: string;
+  date: string;
 }

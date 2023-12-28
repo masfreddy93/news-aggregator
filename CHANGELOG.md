@@ -18,3 +18,6 @@ All notable changes to this project will be documented in this file.
 - Creazione modulo `news`.
 - Creazione pagina `index-news` per la visualizzazione delle notizie.
 - Creazione interfacce per gestione (params & response) della chiamata all'API pubblica di `MediaStack`.
+
+- Creazione componente `news-filters` per gestire i filtri di ricerca delle news.
+- Aggiunta del componente `news-filters` alla `news-index` page.

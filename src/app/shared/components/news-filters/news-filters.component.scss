@@ -1,0 +1,27 @@
+@import '/src/mixins.scss';
+
+$gap-form-fields: 12px;
+
+.-form {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-form-fields;
+  margin-bottom: 24px;
+}
+
+.-row{
+  display: flex;
+  justify-content: space-between;
+  gap: $gap-form-fields;
+
+  @include mobile {
+    flex-direction: column;
+    gap: $gap-form-fields;
+  }
+}
+
+mat-form-field,
+.-actions button
+{
+  width: 100%;
+}
