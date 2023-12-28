@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { finalize } from 'rxjs';
+import { NewsFilters } from 'src/app/shared/components/news-filters/news-filters.component';
 import { NewsDataService } from 'src/app/shared/data/news-data.service';
 import { IMediaStackApiRequestParams } from 'src/app/shared/interfaces/i-media-stack-api-request-params.interface';
 import {
@@ -13,7 +14,7 @@ import {
   templateUrl: './news-index.page.html',
   styleUrls: ['./news-index.page.scss'],
 })
-export class NewsIndexPage implements OnInit {
+export class NewsIndexPage {
   isLoading: boolean = false;
   hasErrors: boolean = false;
 
@@ -27,13 +28,13 @@ export class NewsIndexPage implements OnInit {
   apiDefaultParams: IMediaStackApiRequestParams = {
     limit: 10,
     offset: 0,
+    categories: '',
+    languages: '',
+    date: '',
+    keywords: '',
   };
 
   constructor(private _newsDataService: NewsDataService) {}
-
-  ngOnInit(): void {
-    this._fetchData(this.apiDefaultParams);
-  }
 
   onPageChange(event: PageEvent): void {
     this.apiDefaultParams = {
@@ -44,6 +45,26 @@ export class NewsIndexPage implements OnInit {
         event.pageSize === this.apiDefaultParams.limit
           ? event.pageIndex * event.pageSize
           : 0,
+    };
+
+    this._fetchData(this.apiDefaultParams);
+  }
+
+  /**
+   * Get the event (values of filters) from `news-filters` component
+   * and fetch data with HTTP GET parameters set by user.
+   *
+   * The event is emitted onInit of `news-filters` component and
+   * everytime user submit the form.
+   *
+   */
+  applyFilters(event: NewsFilters): void {
+    this.apiDefaultParams = {
+      ...this.apiDefaultParams,
+      categories: event.category,
+      languages: event.language,
+      date: event.startDate + (event.endDate ? ',' + event.endDate : ''),
+      keywords: event.searchText,
     };
 
     this._fetchData(this.apiDefaultParams);

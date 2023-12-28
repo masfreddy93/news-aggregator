@@ -1,7 +1,24 @@
 <app-main-template [isLoading]="isLoading" [hasErrors]="hasErrors">
   <div body>
     <div class="-news-container">
+      <!-- Title -->
       <div class="-title -h1">Notizie</div>
+
+      <!-- Filters -->
+      <div class="-filters-container">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Filtri
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-news-filters (emitFiltersValue)="applyFilters($event)"></app-news-filters>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+
+      <!-- News -->
       <div class="-news-list" *ngIf="newsList.length; else noData">
         <ng-container *ngFor="let newsItem of newsList">
           <app-news-card [newsItem]="newsItem"></app-news-card>
@@ -14,9 +31,11 @@
         </div>
       </ng-template>
 
+      <!-- Paginator -->
       <div class="-paginator-container">
         <mat-paginator [length]="paginatorDefaultConfig.length"
-          [pageSizeOptions]="paginatorDefaultConfig.pageSizeOptions" (page)="onPageChange($event)"></mat-paginator>
+          [pageSizeOptions]="paginatorDefaultConfig.pageSizeOptions" (page)="onPageChange($event)"
+          class="-custom-box-shadow"></mat-paginator>
       </div>
     </div>
   </div>

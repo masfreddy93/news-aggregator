@@ -1,0 +1,52 @@
+<div class="-filters-container">
+  <form [formGroup]="filtersFG" class="-form">
+    <div class="-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="">Tutte</mat-option>
+          <mat-option *ngFor="let category of categories | keyvalue" [value]="category.key">
+            {{ category.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Lingua</mat-label>
+        <mat-select formControlName="language">
+          <mat-option value="">Tutte</mat-option>
+          <mat-option *ngFor="let lang of languages | keyvalue" [value]="lang.key">
+            {{ lang.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Da</mat-label>
+        <input matInput [matDatepicker]="startDatepicker" formControlName="startDate">
+        <mat-datepicker-toggle matIconSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatepicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>A</mat-label>
+        <input matInput [matDatepicker]="endDatePicker" formControlName="endDate"
+          [min]="filtersFG.get('startDate')?.value ?? '2222-05-05'">
+        <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Inserisci parola chiave</mat-label>
+        <input matInput placeholder="Es. Pizza" formControlName="searchText">
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class="-actions -row">
+    <button mat-raised-button (click)="applyFilters()" [disabled]="!filtersFG.valid">Applica filtri</button>
+    <button mat-flat-button color="warn" (click)="resetFilters()">Reset filtri</button>
+  </div>
+</div>

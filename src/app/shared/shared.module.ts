@@ -9,6 +9,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MainTemplateComponent } from './components/main-template/main-template.component';
 import { RouterModule } from '@angular/router';
 import { NewsCardComponent } from './components/news-card/news-card.component';
+import { NewsFiltersComponent } from './components/news-filters/news-filters.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -16,6 +23,7 @@ import { NewsCardComponent } from './components/news-card/news-card.component';
     SidebarComponent,
     MainTemplateComponent,
     NewsCardComponent,
+    NewsFiltersComponent,
   ],
   imports: [
     CommonModule,
@@ -24,12 +32,19 @@ import { NewsCardComponent } from './components/news-card/news-card.component';
     MatTooltipModule,
     MatProgressSpinnerModule,
     RouterModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   exports: [
     TopbarComponent,
     SidebarComponent,
     MainTemplateComponent,
     NewsCardComponent,
+    NewsFiltersComponent,
   ],
 })
 export class SharedModule {}
