@@ -25,3 +25,6 @@ All notable changes to this project will be documented in this file.
 - Aggiunta la possibilità di salvare una news tra i preferiti (nel localStorage).
 - Aggiunta la possibilità di rimuovere una news dai preferiti (localStorage).
 - Ora i bottoni 'Salva' e 'Apri' sono disabilitati se la news non ha un url valorizzato.
+
+- Creazione modulo `favorites`.
+- Creazione pagina `favorite-news` per la visualizzazione delle notizie preferite.
