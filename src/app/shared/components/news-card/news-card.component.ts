@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IMediaStackNews } from '../../interfaces/i-media-stack-api-response.interface';
+import { FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY } from '../../consts/favorites-news-list-local-storage-key.const';
 
 @Component({
   selector: 'app-news-card',
@@ -17,6 +18,9 @@ export class NewsCardComponent implements OnInit {
    */
   isInFavorites: boolean = false;
 
+  FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY: string =
+    FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY;
+
   ngOnInit(): void {
     this.checkFavoriteStateOnInit();
   }
@@ -24,25 +28,36 @@ export class NewsCardComponent implements OnInit {
   /**
    * Adds or removes a `newsItem` from favorites, saving the information in localStorage
    * and in the component's property `isInFavorites`.
-   * The key of the `newsItem` in localStorage is the `newsItem` url and the value is the
-   * `newsItem` object converted to a string.
    */
   toggleFavorite(): void {
-    if (!this.newsItem || !this.newsItem.url) {
+    if (!this.newsItem) {
       console.error('Could not retrieve itemNews informations');
 
       return;
     }
 
-    if (localStorage.getItem(this.newsItem.url)) {
-      localStorage.removeItem(this.newsItem.url);
-      this.isInFavorites = false;
+    const favoritesNewsList: IMediaStackNews[] = JSON.parse(
+      localStorage.getItem(this.FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY) ?? '[]'
+    );
+    const newsItemIndex: number = favoritesNewsList.findIndex(
+      (newsItem) => newsItem.url === this.newsItem?.url
+    );
 
-      return;
+    // check if itemNews is already in favorites array
+    // and remove it if already present or add it if not present
+    if (newsItemIndex !== -1) {
+      favoritesNewsList.splice(newsItemIndex, 1);
+      this.isInFavorites = false;
+    } else {
+      favoritesNewsList.push(this.newsItem);
+      this.isInFavorites = true;
     }
 
-    localStorage.setItem(this.newsItem.url, JSON.stringify(this.newsItem));
-    this.isInFavorites = true;
+    // save favorites array in local storage
+    localStorage.setItem(
+      this.FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY,
+      JSON.stringify(favoritesNewsList)
+    );
   }
 
   /**
@@ -56,6 +71,12 @@ export class NewsCardComponent implements OnInit {
       return;
     }
 
-    this.isInFavorites = localStorage.getItem(this.newsItem.url) ? true : false;
+    const favoritesNewsList: IMediaStackNews[] = JSON.parse(
+      localStorage.getItem(this.FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY) ?? '[]'
+    );
+
+    this.isInFavorites = favoritesNewsList
+      .map((itemNews) => itemNews.url)
+      .includes(this.newsItem.url);
   }
 }
