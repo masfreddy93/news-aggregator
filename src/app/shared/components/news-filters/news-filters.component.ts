@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NewsLanguages } from '../../enum/news-languages.enum';
 import { NewsCategories } from '../../enum/news-categories.enum';
@@ -17,7 +17,7 @@ export interface NewsFilters {
   templateUrl: './news-filters.component.html',
   styleUrls: ['./news-filters.component.scss'],
 })
-export class NewsFiltersComponent implements OnInit {
+export class NewsFiltersComponent {
   @Output() emitFiltersValue: EventEmitter<NewsFilters> = new EventEmitter();
 
   FILTERS_FORM_DEFAULT_VALUE: NewsFilters = {
@@ -34,11 +34,6 @@ export class NewsFiltersComponent implements OnInit {
   categories: typeof NewsCategories = NewsCategories;
 
   constructor(private _fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    // emit the first value of form onInit of the component
-    this.applyFilters();
-  }
 
   applyFilters(): void {
     const formValues: any = this.filtersFG.getRawValue();
