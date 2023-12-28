@@ -2,7 +2,7 @@
   <div body>
     <div class="-news-container">
       <!-- Title -->
-      <div class="-title -h1">Notizie</div>
+      <div class="-title -h1">{{ title }}</div>
 
       <!-- Filters -->
       <div class="-filters-container">
@@ -33,7 +33,7 @@
 
       <!-- Paginator -->
       <div class="-paginator-container">
-        <mat-paginator [length]="paginatorDefaultConfig.length"
+        <mat-paginator #paginator [length]="paginatorDefaultConfig.length"
           [pageSizeOptions]="paginatorDefaultConfig.pageSizeOptions" (page)="onPageChange($event)"
           class="-custom-box-shadow"></mat-paginator>
       </div>

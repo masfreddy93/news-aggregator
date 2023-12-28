@@ -6,7 +6,7 @@
         <mat-select formControlName="category">
           <mat-option value="">Tutte</mat-option>
           <mat-option *ngFor="let category of categories | keyvalue" [value]="category.key">
-            {{ category.value }}
+            {{ category.key | titlecase }}
           </mat-option>
         </mat-select>
       </mat-form-field>

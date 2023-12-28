@@ -13,6 +13,13 @@ const routes: Routes = [
           import('./modules/news/news.module').then((m) => m.NewsModule),
       },
       {
+        path: 'favorites',
+        loadChildren: () =>
+          import('./modules/favorites/favorites.module').then(
+            (m) => m.FavoritesModule
+          ),
+      },
+      {
         path: '',
         redirectTo: 'news',
         pathMatch: 'full',

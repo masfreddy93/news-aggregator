@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { finalize } from 'rxjs';
 import { NewsFilters } from 'src/app/shared/components/news-filters/news-filters.component';
 import { NewsDataService } from 'src/app/shared/data/news-data.service';
@@ -14,13 +14,20 @@ import {
   templateUrl: './news-index.page.html',
   styleUrls: ['./news-index.page.scss'],
 })
-export class NewsIndexPage {
+export class NewsIndexPage implements OnInit {
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+
+  title: string = 'Notizie';
+
   isLoading: boolean = false;
   hasErrors: boolean = false;
 
   newsList: IMediaStackNews[] = [];
 
-  paginatorDefaultConfig: { length: number; pageSizeOptions: number[] } = {
+  paginatorDefaultConfig: {
+    length: number;
+    pageSizeOptions: number[];
+  } = {
     length: 0,
     pageSizeOptions: [10, 25, 50],
   };
@@ -35,6 +42,10 @@ export class NewsIndexPage {
   };
 
   constructor(private _newsDataService: NewsDataService) {}
+
+  ngOnInit(): void {
+    this._fetchData(this.apiDefaultParams);
+  }
 
   onPageChange(event: PageEvent): void {
     this.apiDefaultParams = {
@@ -65,7 +76,13 @@ export class NewsIndexPage {
       languages: event.language,
       date: event.startDate + (event.endDate ? ',' + event.endDate : ''),
       keywords: event.searchText,
+      offset: 0, //everytime I change filters the call should start from page 0
     };
+
+    //everytime I change filters the call should start from page 0
+    if (this.paginator) {
+      this.paginator.pageIndex = 0;
+    }
 
     this._fetchData(this.apiDefaultParams);
   }
@@ -80,7 +97,6 @@ export class NewsIndexPage {
       .subscribe({
         next: (apiResponse: IMediaStackApiResponse) => {
           this.newsList = apiResponse.data;
-          console.log(this.newsList);
 
           this.paginatorDefaultConfig = {
             ...this.paginatorDefaultConfig,
