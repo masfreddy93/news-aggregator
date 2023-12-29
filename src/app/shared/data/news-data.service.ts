@@ -15,7 +15,7 @@ export class NewsDataService {
    * For reference, see [MediaStack Documentation](https://mediastack.com/documentation#:~:text=API%20Features-,Live%20News,-Available%20on%3A%20All).
    */
   private _apiUrl: string =
-    'http://api.mediastack.com/v1/news?access_key=1018939fa0c395462841534dbdf1600c';
+    'http://api.mediastack.com/v1/news?access_key=6637c9f790106a3bb3564d27096b46ee';
 
   constructor(private _http: HttpClient) {}
 
