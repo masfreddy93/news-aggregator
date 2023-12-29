@@ -7,6 +7,7 @@ import {
   IConfirmationDialogData,
 } from '../../dialogs/confirmation/confirmation.dialog';
 import { NewsLanguages } from '../../enum/news-languages.enum';
+import { NewsCategories } from '../../enum/news-categories.enum';
 
 @Component({
   selector: 'app-news-card',
@@ -120,5 +121,25 @@ export class NewsCardComponent implements OnInit {
 
       window.open(this.newsItem?.url!, '_blank');
     });
+  }
+
+  /**
+   * Retrieves the value associated with the provided key from the categories enum.
+   */
+  getCategoryValue(key: string | undefined | null): string {
+    return (
+      NewsCategories[key as keyof typeof NewsCategories] ??
+      'Categoria non disponibile'
+    );
+  }
+
+  /**
+   * Retrieves the value associated with the provided key from the languages enum.
+   */
+  getLanguageValue(key: string | undefined | null): string {
+    return (
+      NewsLanguages[key as keyof typeof NewsLanguages] ??
+      'Lingua non disponibile'
+    );
   }
 }

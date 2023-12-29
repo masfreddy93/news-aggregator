@@ -20,9 +20,8 @@
       </div>
       <div class="-language-and-category-row -truncate -one-line">
         <span class="-op-8">Lingua: </span>
-        <span class="-lang"> {{ newsItem?.language ?? 'Lingua non disponibile' }} </span>
-        <span class="-chip"> {{ (newsItem?.category | titlecase) ?? 'Categoria non disponibile'
-          }}</span>
+        <span class="-lang"> {{ getLanguageValue(newsItem?.language) }} </span>
+        <span class="-chip"> {{ getCategoryValue(newsItem?.category) }}</span>
       </div>
       <div class="-actions">
         <button mat-button [disabled]="!newsItem?.url" class="-toggle-favorite-btn" (click)="toggleFavorite()">
