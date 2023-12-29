@@ -34,7 +34,7 @@
       background-color: map-get($primary, 50);
     }
 
-    @include mobile-tablet {
+    @include mobile {
       justify-content: center;
       width: 100%;
       max-width: 500px;

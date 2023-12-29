@@ -25,7 +25,7 @@
       </div>
       <div class="-actions">
         <button mat-button [disabled]="!newsItem?.url" (click)="toggleFavorite()">
-          <mat-icon [class.-color-red]="isInFavorites">favorite</mat-icon>
+          <mat-icon [color]="isInFavorites ? 'primary' : ''">favorite</mat-icon>
           <span>{{ isInFavorites ? 'Salvato' : 'Salva' }}</span>
         </button>
         <button mat-button [disabled]="!newsItem?.url" (click)="openExternalLink()">

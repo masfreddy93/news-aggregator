@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [FavoritesIndexPage],
@@ -17,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatPaginatorModule,
     MatExpansionModule,
     MatIconModule,
+    MatDialogModule,
   ],
 })
 export class FavoritesModule {}
