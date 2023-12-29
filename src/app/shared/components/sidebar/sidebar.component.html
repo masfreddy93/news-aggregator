@@ -1,11 +1,12 @@
 <div class="-sidebar-container">
-  <div class="-title -h2">Menu</div>
   <div class="-menu-voices">
-    <div class="-menu-voice" *ngFor="let voice of MAIN_MENU">
-      <mat-icon>{{ voice.iconName }}</mat-icon>
-      <a [routerLink]="'/auth/' + voice.routerLink"
-        (click)="responsiveService.isMobile ? sidebarService.toggleSidebar() : null">{{
-        voice.label }}</a>
-    </div>
+    <ng-container *ngFor="let voice of MAIN_MENU">
+      <a [routerLink]="'/auth/' + voice.routerLink" routerLinkActive="-active" class="-menu-voice"
+        (click)="responsiveService.isMobile ? sidebarService.toggleSidebar() : null">
+        <mat-icon>{{ voice.iconName }}</mat-icon>
+        <span>{{
+          voice.label }}</span>
+      </a>
+    </ng-container>
   </div>
 </div>

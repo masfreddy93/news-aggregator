@@ -5,28 +5,32 @@
   <div class="-content-side">
     <div class="-heading">
       <div class="-title -h3 -truncate -one-line">{{ newsItem?.title ?? 'Titolo non disponibile' }}</div>
-      <div class="-description -truncate -three-lines">{{ newsItem?.description ?? 'Descrizione non disponibile' }}
+      <div class="-description -truncate -three-lines -op-8">{{ newsItem?.description ?? 'Descrizione non disponibile'
+        }}
       </div>
     </div>
 
     <div class="-details">
       <div class="-author-and-date-row -truncate -one-line">
-        <span>di</span>
-        <span class="-author"> {{ newsItem?.author ?? 'Autore non disponibile' }}, </span>
-        <span> {{ (newsItem?.published_at | date: 'fullDate') ?? 'Data pubblicazione non disponibile' }}</span>
+        <span class="-op-8">di</span>
+        <span class="-author "> {{ newsItem?.author ?? 'Autore non disponibile' }}, </span>
+        <span class="-op-8"> {{ (newsItem?.published_at | date: 'fullDate':'UTC') ?? 'Data pubblicazione non
+          disponibile'
+          }}</span>
       </div>
       <div class="-language-and-category-row -truncate -one-line">
-        <span> Lingua: {{ newsItem?.language ?? 'Lingua non disponibile' }} </span>
-        <span class="-chip"> {{ (newsItem?.category | titlecase) ?? 'Categoria non disponibile' }}</span>
+        <span class="-op-8">Lingua: </span>
+        <span class="-lang"> {{ getLanguageValue(newsItem?.language) }} </span>
+        <span class="-chip"> {{ getCategoryValue(newsItem?.category) }}</span>
       </div>
       <div class="-actions">
-        <button mat-button (click)="toggleFavorite()" [disabled]="!newsItem?.url">
-          <mat-icon [class.-color-red]="isInFavorites">favorite</mat-icon>
+        <button mat-button [disabled]="!newsItem?.url" class="-toggle-favorite-btn" (click)="toggleFavorite()">
+          <mat-icon [color]="isInFavorites ? 'primary' : ''">favorite</mat-icon>
           <span>{{ isInFavorites ? 'Salvato' : 'Salva' }}</span>
         </button>
-        <button mat-button [disabled]="!newsItem?.url">
+        <button mat-flat-button [disabled]="!newsItem?.url" (click)="openExternalLink()" color="primary">
           <mat-icon>open_in_new</mat-icon>
-          <a [href]="newsItem?.url" target="_blank">Apri</a>
+          <span>Apri</span>
         </button>
       </div>
     </div>

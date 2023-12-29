@@ -1,6 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IMediaStackNews } from '../../interfaces/i-media-stack-api-response.interface';
 import { FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY } from '../../consts/favorites-news-list-local-storage-key.const';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  ConfirmationDialog,
+  IConfirmationDialogData,
+} from '../../dialogs/confirmation/confirmation.dialog';
+import { NewsLanguages } from '../../enum/news-languages.enum';
+import { NewsCategories } from '../../enum/news-categories.enum';
 
 @Component({
   selector: 'app-news-card',
@@ -14,12 +21,19 @@ export class NewsCardComponent implements OnInit {
   @Input() newsItem?: IMediaStackNews;
 
   /**
+   * Emit an event everytime the toggleFavorite button is pressed.
+   */
+  @Output() emitToggleEvent: EventEmitter<void> = new EventEmitter();
+
+  /**
    * Indicates whether a news is among the favorites.
    */
   isInFavorites: boolean = false;
 
   FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY: string =
     FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY;
+
+  constructor(private _matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.checkFavoriteStateOnInit();
@@ -58,6 +72,8 @@ export class NewsCardComponent implements OnInit {
       this.FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY,
       JSON.stringify(favoritesNewsList)
     );
+
+    this.emitToggleEvent.emit();
   }
 
   /**
@@ -78,5 +94,52 @@ export class NewsCardComponent implements OnInit {
     this.isInFavorites = favoritesNewsList
       .map((itemNews) => itemNews.url)
       .includes(this.newsItem.url);
+  }
+
+  /**
+   * Opens a dialog to alert the user that he/she's opening an external url.
+   */
+  openExternalLink(): void {
+    if (!this.newsItem?.url) {
+      return;
+    }
+
+    const dialogData: IConfirmationDialogData = {
+      title: 'Stai per lasciare la pagina',
+      message: 'Verrai reindirizzato/a al seguente link: ' + this.newsItem.url,
+    };
+
+    const dialogRef = this._matDialog.open(ConfirmationDialog, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((res: boolean) => {
+      if (!res) {
+        return;
+      }
+
+      window.open(this.newsItem?.url!, '_blank');
+    });
+  }
+
+  /**
+   * Retrieves the value associated with the provided key from the categories enum.
+   */
+  getCategoryValue(key: string | undefined | null): string {
+    return (
+      NewsCategories[key as keyof typeof NewsCategories] ??
+      'Categoria non disponibile'
+    );
+  }
+
+  /**
+   * Retrieves the value associated with the provided key from the languages enum.
+   */
+  getLanguageValue(key: string | undefined | null): string {
+    return (
+      NewsLanguages[key as keyof typeof NewsLanguages] ??
+      'Lingua non disponibile'
+    );
   }
 }

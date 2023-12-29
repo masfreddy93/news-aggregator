@@ -17,8 +17,8 @@ export const NEWS_MOCK_DATA: IMediaStackApiResponse = {
       source: 'mauinow',
       image:
         'https://media.mauinow.com/file/mauinow/2018/09/wireless-emergency-alert-2-300x200.jpg',
-      category: 'general',
-      language: 'en',
+      category: 'generalsll',
+      language: null,
       country: 'us',
       published_at: '2023-09-30T00:00:00+00:00',
     },

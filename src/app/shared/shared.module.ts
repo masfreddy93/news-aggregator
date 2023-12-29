@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ConfirmationDialog } from './dialogs/confirmation/confirmation.dialog';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MainTemplateComponent,
     NewsCardComponent,
     NewsFiltersComponent,
+    ConfirmationDialog,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MainTemplateComponent,
     NewsCardComponent,
     NewsFiltersComponent,
+    ConfirmationDialog,
   ],
 })
 export class SharedModule {}

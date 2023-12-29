@@ -2,7 +2,10 @@
   <div body>
     <div class="-news-container">
       <!-- Title -->
-      <div class="-title -h1">{{ title }}</div>
+      <div class="-title-section -custom-box-shadow">
+        <mat-icon>newspaper</mat-icon>
+        <span class="-title">{{ title }}</span>
+      </div>
 
       <!-- Filters -->
       <div class="-filters-container">
@@ -21,7 +24,7 @@
       <!-- News -->
       <div class="-news-list" *ngIf="newsList.length; else noData">
         <ng-container *ngFor="let newsItem of newsList">
-          <app-news-card [newsItem]="newsItem"></app-news-card>
+          <app-news-card [newsItem]="newsItem" (emitToggleEvent)="listenToggleEvent($event)"></app-news-card>
         </ng-container>
       </div>
       <ng-template #noData>

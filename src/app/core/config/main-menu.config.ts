@@ -2,6 +2,11 @@ import { IMainMenuVoice } from 'src/app/shared/interfaces/i-main-menu-voice.inte
 
 export const MAIN_MENU_CONFIG: IMainMenuVoice[] = [
   {
+    label: 'Home',
+    iconName: 'home',
+    routerLink: 'home',
+  },
+  {
     label: 'Notizie',
     iconName: 'newspaper',
     routerLink: 'news',

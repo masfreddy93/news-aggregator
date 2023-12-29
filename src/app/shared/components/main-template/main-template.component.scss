@@ -21,8 +21,17 @@
   align-items: center;
   gap: 16px;
 
+  img {
+    width: 250px;
+  }
+
   .-error-message{
     text-align: center;
+    max-width: 80%;
+
+    a {
+      color: map-get($primary, 500);
+    }
   }
 }
 
