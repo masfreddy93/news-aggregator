@@ -24,7 +24,7 @@
       <!-- News -->
       <div class="-news-list" *ngIf="newsList.length; else noData">
         <ng-container *ngFor="let newsItem of newsList">
-          <app-news-card [newsItem]="newsItem"></app-news-card>
+          <app-news-card [newsItem]="newsItem" (emitToggleEvent)="listenToggleEvent($event)"></app-news-card>
         </ng-container>
       </div>
       <ng-template #noData>

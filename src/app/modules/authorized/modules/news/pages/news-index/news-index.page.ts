@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { finalize } from 'rxjs';
 import { NewsFilters } from 'src/app/shared/components/news-filters/news-filters.component';
 import { NewsDataService } from 'src/app/shared/data/news-data.service';
+import { formatDate } from 'src/app/shared/functions/ms-format-date.function';
 import { IMediaStackApiRequestParams } from 'src/app/shared/interfaces/i-media-stack-api-request-params.interface';
 import {
   IMediaStackApiResponse,
@@ -47,6 +48,37 @@ export class NewsIndexPage implements OnInit {
     this._fetchData(this.apiDefaultParams);
   }
 
+  /**
+   * Get the event (values of filters) from `news-filters` component
+   * and fetch data with HTTP GET parameters set by user.
+   *
+   * The event is emitted onInit of `news-filters` component and
+   * everytime user submit the form.
+   *
+   */
+  applyFilters(event: NewsFilters): void {
+    this.apiDefaultParams = {
+      ...this.apiDefaultParams,
+      categories: event.category,
+      languages: event.language,
+      date:
+        event.startDate +
+        ',' +
+        (event.endDate ? event.endDate : formatDate(new Date())),
+      keywords: event.searchText,
+      offset: 0, //everytime I change filters the call should start from page 0
+    };
+
+    console.log(this.apiDefaultParams);
+
+    //everytime I change filters the call should start from page 0
+    if (this.paginator) {
+      this.paginator.pageIndex = 0;
+    }
+
+    this._fetchData(this.apiDefaultParams);
+  }
+
   onPageChange(event: PageEvent): void {
     this.apiDefaultParams = {
       ...this.apiDefaultParams,
@@ -61,30 +93,8 @@ export class NewsIndexPage implements OnInit {
     this._fetchData(this.apiDefaultParams);
   }
 
-  /**
-   * Get the event (values of filters) from `news-filters` component
-   * and fetch data with HTTP GET parameters set by user.
-   *
-   * The event is emitted onInit of `news-filters` component and
-   * everytime user submit the form.
-   *
-   */
-  applyFilters(event: NewsFilters): void {
-    this.apiDefaultParams = {
-      ...this.apiDefaultParams,
-      categories: event.category,
-      languages: event.language,
-      date: event.startDate + (event.endDate ? ',' + event.endDate : ''),
-      keywords: event.searchText,
-      offset: 0, //everytime I change filters the call should start from page 0
-    };
-
-    //everytime I change filters the call should start from page 0
-    if (this.paginator) {
-      this.paginator.pageIndex = 0;
-    }
-
-    this._fetchData(this.apiDefaultParams);
+  listenToggleEvent(event: void): void {
+    // method not implemented
   }
 
   private _fetchData(params: IMediaStackApiRequestParams): void {
@@ -92,7 +102,7 @@ export class NewsIndexPage implements OnInit {
 
     // FIXME: remove mock after tests
     this._newsDataService
-      .getAllMockData(params)
+      .getAll(params)
       .pipe(finalize(() => (this.isLoading = false)))
       .subscribe({
         next: (apiResponse: IMediaStackApiResponse) => {

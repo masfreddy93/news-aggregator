@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IMediaStackNews } from '../../interfaces/i-media-stack-api-response.interface';
 import { FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY } from '../../consts/favorites-news-list-local-storage-key.const';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +18,11 @@ export class NewsCardComponent implements OnInit {
    * The newsItem object.
    */
   @Input() newsItem?: IMediaStackNews;
+
+  /**
+   * Emit an event everytime the toggleFavorite button is pressed.
+   */
+  @Output() emitToggleEvent: EventEmitter<void> = new EventEmitter();
 
   /**
    * Indicates whether a news is among the favorites.
@@ -66,6 +71,8 @@ export class NewsCardComponent implements OnInit {
       this.FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY,
       JSON.stringify(favoritesNewsList)
     );
+
+    this.emitToggleEvent.emit();
   }
 
   /**

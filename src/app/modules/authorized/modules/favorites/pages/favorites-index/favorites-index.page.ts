@@ -63,6 +63,14 @@ export class FavoritesIndexPage implements OnInit {
     this._fetchData();
   }
 
+  /**
+   * Refresh displayed data everytime toggleFavorite button is pressed.
+   *
+   */
+  listenToggleEvent(event: void): void {
+    this._fetchData();
+  }
+
   onPageChange(event: PageEvent): void {
     this.apiDefaultParams = {
       ...this.apiDefaultParams,

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NewsLanguages } from '../../enum/news-languages.enum';
 import { NewsCategories } from '../../enum/news-categories.enum';
+import { formatDate } from '../../functions/ms-format-date.function';
 
 // interface used to handle filters of this compoment
 export interface NewsFilters {
@@ -39,8 +40,8 @@ export class NewsFiltersComponent {
     const formValues: any = this.filtersFG.getRawValue();
     const valueToEmit: NewsFilters = {
       ...formValues,
-      startDate: this._formatDate(formValues.startDate),
-      endDate: this._formatDate(formValues.endDate),
+      startDate: formatDate(formValues.startDate),
+      endDate: formatDate(formValues.endDate),
     };
 
     this.emitFiltersValue.emit(valueToEmit);
@@ -48,20 +49,5 @@ export class NewsFiltersComponent {
 
   resetFilters(): void {
     this.filtersFG.reset(this.FILTERS_FORM_DEFAULT_VALUE);
-  }
-
-  /**
-   * Returns a date in string format as wanted MediaStack for API request
-   */
-  private _formatDate(inputDate: string): string {
-    if (!inputDate) {
-      return '';
-    }
-
-    const date: Date = new Date(inputDate);
-
-    return (
-      date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
-    );
   }
 }

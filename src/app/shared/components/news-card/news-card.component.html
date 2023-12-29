@@ -14,7 +14,8 @@
       <div class="-author-and-date-row -truncate -one-line">
         <span class="-op-8">di</span>
         <span class="-author "> {{ newsItem?.author ?? 'Autore non disponibile' }}, </span>
-        <span class="-op-8"> {{ (newsItem?.published_at | date: 'fullDate') ?? 'Data pubblicazione non disponibile'
+        <span class="-op-8"> {{ (newsItem?.published_at | date: 'fullDate':'UTC') ?? 'Data pubblicazione non
+          disponibile'
           }}</span>
       </div>
       <div class="-language-and-category-row -truncate -one-line">
@@ -24,11 +25,11 @@
           }}</span>
       </div>
       <div class="-actions">
-        <button mat-button [disabled]="!newsItem?.url" (click)="toggleFavorite()">
+        <button mat-button [disabled]="!newsItem?.url" class="-toggle-favorite-btn" (click)="toggleFavorite()">
           <mat-icon [color]="isInFavorites ? 'primary' : ''">favorite</mat-icon>
           <span>{{ isInFavorites ? 'Salvato' : 'Salva' }}</span>
         </button>
-        <button mat-button [disabled]="!newsItem?.url" (click)="openExternalLink()">
+        <button mat-flat-button [disabled]="!newsItem?.url" (click)="openExternalLink()" color="primary">
           <mat-icon>open_in_new</mat-icon>
           <span>Apri</span>
         </button>

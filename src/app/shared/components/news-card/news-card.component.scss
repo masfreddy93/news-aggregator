@@ -1,6 +1,11 @@
 @import '/src/consts.scss';
 @import 'src/mixins.scss';
 
+:host {
+  display: block;
+  width: 100%;
+}
+
 .-card-container {
   display: flex;
   background-color: map-get($primary, 50);
@@ -57,7 +62,14 @@
 
       button {
         width: 120px;
+
+        @include mobile-tablet {
+          width: 100%;
+        }
+
+        &.-toggle-favorite-btn {
         background-color: map-get($primary, 100);
+        }
       }
     }
   }
