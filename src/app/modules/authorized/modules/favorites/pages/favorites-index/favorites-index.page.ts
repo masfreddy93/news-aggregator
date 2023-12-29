@@ -67,7 +67,7 @@ export class FavoritesIndexPage implements OnInit {
     this.apiDefaultParams = {
       ...this.apiDefaultParams,
       limit: event.pageSize,
-      // se cambio il pagesize allora la chiamata deve partire dalla pagina con index 0
+      //if change pageSize then the call should start from page 0
       offset:
         event.pageSize === this.apiDefaultParams.limit
           ? event.pageIndex * event.pageSize

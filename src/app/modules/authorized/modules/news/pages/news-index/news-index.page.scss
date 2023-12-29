@@ -1,4 +1,5 @@
 @import '/src/mixins.scss';
+@import '/src/consts.scss';
 
 .-news-container {
   @include mobile-tablet {
@@ -7,8 +8,20 @@
   }
 }
 
-.-title{
-  margin-bottom: 36px;
+.-title-section{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: map-get($primary, 100);
+  color: map-get($primary, 500);
+  margin-bottom: 28px;
+
+  span.-title {
+    font-size: 22px;
+    font-weight: 700;
+  }
 }
 
 .-filters-container {

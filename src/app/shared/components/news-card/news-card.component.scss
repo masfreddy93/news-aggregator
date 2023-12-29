@@ -3,7 +3,7 @@
 
 .-card-container {
   display: flex;
-  background-color: #fff;
+  background-color: map-get($primary, 50);
   border-radius: 8px;
 
   @include mobile-tablet {
@@ -46,17 +46,27 @@
       font-style: italic;
     }
 
+    .-lang {
+      margin-right: 4px;
+    }
+
     .-actions{
-      margin-top: 8px;
+      margin-top: 12px;
       display: flex;
       gap: 8px;
+
+      button {
+        width: 120px;
+        background-color: map-get($primary, 100);
+      }
     }
   }
 }
 
 .-chip {
-  background-color: $sidebar-background-color;
-  padding: 4px;
+  background-color: map-get($primary, 400);
+  color: #fff;
+  padding: 4px 8px;
   border-radius: 20px;
 }
 
@@ -80,4 +90,8 @@
 
 .-color-red {
   color: red;
+}
+
+.-op-8{
+  opacity: .8;
 }

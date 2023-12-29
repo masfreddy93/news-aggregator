@@ -1,6 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IMediaStackNews } from '../../interfaces/i-media-stack-api-response.interface';
 import { FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY } from '../../consts/favorites-news-list-local-storage-key.const';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  ConfirmationDialog,
+  IConfirmationDialogData,
+} from '../../dialogs/confirmation/confirmation.dialog';
+import { NewsLanguages } from '../../enum/news-languages.enum';
 
 @Component({
   selector: 'app-news-card',
@@ -20,6 +26,8 @@ export class NewsCardComponent implements OnInit {
 
   FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY: string =
     FAVORITES_NEWS_LIST_LOCAL_STORAGE_KEY;
+
+  constructor(private _matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.checkFavoriteStateOnInit();
@@ -78,5 +86,32 @@ export class NewsCardComponent implements OnInit {
     this.isInFavorites = favoritesNewsList
       .map((itemNews) => itemNews.url)
       .includes(this.newsItem.url);
+  }
+
+  /**
+   * Opens a dialog to alert the user that he/she's opening an external url.
+   */
+  openExternalLink(): void {
+    if (!this.newsItem?.url) {
+      return;
+    }
+
+    const dialogData: IConfirmationDialogData = {
+      title: 'Stai per lasciare la pagina',
+      message: 'Verrai reindirizzato/a al seguente link: ' + this.newsItem.url,
+    };
+
+    const dialogRef = this._matDialog.open(ConfirmationDialog, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((res: boolean) => {
+      if (!res) {
+        return;
+      }
+
+      window.open(this.newsItem?.url!, '_blank');
+    });
   }
 }

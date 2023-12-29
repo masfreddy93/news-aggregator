@@ -4,10 +4,15 @@
 
   <!-- Errors refresh option  -->
   <div class="-error-options" *ngIf="hasErrors">
+    <img src="../../../../assets/imgs/no-data.png" alt="">
     <div class="-error-message">
       OPS! Sembra che ci siano problemi nel caricamento della pagina.
+      <br>
+      Ricarica e se il problema persiste accedi a questo
+      <a href="https://masieronicola.atlassian.net/wiki/spaces/NA/pages/9568523/News+Aggregator+-+Documentazione+del+Progetto#:~:text=front%2Dend%20dell%27applicazione.-,Possibili%20problemi,-Durante%20l%E2%80%99utilizzo%20dell%E2%80%99applicazione"
+        target="_blank">link</a> oppure invia una <a href="mailto: masieronicola@gmail.com">email</a>.
     </div>
-    <button mat-flat-button color="warn" (click)="reloadPage()">
+    <button mat-flat-button color="primary" (click)="reloadPage()">
       <mat-icon>refresh</mat-icon>
       <span>Ricarica pagina</span>
     </button>

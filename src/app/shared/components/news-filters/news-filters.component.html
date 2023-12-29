@@ -6,7 +6,7 @@
         <mat-select formControlName="category">
           <mat-option value="">Tutte</mat-option>
           <mat-option *ngFor="let category of categories | keyvalue" [value]="category.key">
-            {{ category.key | titlecase }}
+            {{ category.value | titlecase }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -46,7 +46,8 @@
   </form>
 
   <div class="-actions -row">
-    <button mat-raised-button (click)="applyFilters()" [disabled]="!filtersFG.valid">Applica filtri</button>
-    <button mat-flat-button color="warn" (click)="resetFilters()">Reset filtri</button>
+    <button mat-raised-button (click)="applyFilters()" color="primary" [disabled]="!filtersFG.valid">Applica
+      filtri</button>
+    <button mat-flat-button (click)="resetFilters()" class="-reset-btn">Reset filtri</button>
   </div>
 </div>
