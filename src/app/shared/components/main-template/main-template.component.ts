@@ -13,7 +13,6 @@ export class MainTemplateComponent {
   @Input() isLoading: boolean = false;
   @Input() hasErrors: boolean = false;
 
-  //FIXME: should be an output parameter? (to handle fetchDatas from the component)
   reloadPage(): void {
     window.location.reload();
   }

@@ -69,8 +69,6 @@ export class NewsIndexPage implements OnInit {
       offset: 0, //everytime I change filters the call should start from page 0
     };
 
-    console.log(this.apiDefaultParams);
-
     //everytime I change filters the call should start from page 0
     if (this.paginator) {
       this.paginator.pageIndex = 0;
@@ -100,7 +98,6 @@ export class NewsIndexPage implements OnInit {
   private _fetchData(params: IMediaStackApiRequestParams): void {
     this.isLoading = true;
 
-    // FIXME: remove mock after tests
     this._newsDataService
       .getAll(params)
       .pipe(finalize(() => (this.isLoading = false)))
